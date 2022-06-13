@@ -10,19 +10,27 @@ interface RepositoryItemProps {
     }
 }
 
+function verifica(props: RepositoryItemProps) {
+    
+    if(props.repository.description == null){
+        return "The repository description is empty.";
+    }else{
+        return props.repository.description;
+    }
+}
 
 export function Table(props: RepositoryItemProps) {
     return (
         <>
             <table >
                 <tr>
-                    <th>Nome</th>
-                    <th>Descricao</th>
-                    <th>Link</th>
+                    <th>Nome:</th>
+                    <th>Descrição:</th>
+                    <th>Link:</th>
                 </tr>
                 <tr>
                     <td><strong> {props.repository.name} </strong></td>
-                    <td><p>{props.repository.description}</p></td>
+                    <td><p>{verifica(props)}</p></td>
                     <td><a target="_blank" href={props.repository.html_url}>Acessar Repositório</a></td>
                 </tr>
             </table>
