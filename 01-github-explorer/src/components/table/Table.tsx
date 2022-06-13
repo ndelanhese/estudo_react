@@ -13,7 +13,7 @@ export function Table() {
                 <tr>
                     <td>Emil</td>
                     <td>Tobias</td>
-                    <td>Linus</td>
+                    <td>Linux</td>
                 </tr>
                 <tr>
                     <td>16</td>
