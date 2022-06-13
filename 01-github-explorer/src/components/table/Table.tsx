@@ -1,5 +1,5 @@
 
-import '../styles/table'
+import '../../styles/table'
 
 export function Table() {
     return (
