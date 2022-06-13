@@ -1,4 +1,6 @@
-interface RepositoryItemProps{
+import { Table } from "./table/Table";
+
+interface RepositoryItemProps {
     repository: {
         name: string;
         description: string;
@@ -10,13 +12,8 @@ interface RepositoryItemProps{
 export function RepositoryItem(props: RepositoryItemProps) {
     return (
         <li>
-            <strong> {props.repository.name} </strong>
-            <p>{props.repository.description}</p>
+            <Table key={props.repository.name} repository={props.repository} />
 
-            
-            <a target="_blank" href={props.repository.html_url}>
-            Acessar Repositório
-            </a>
         </li>
     );
 }

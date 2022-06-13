@@ -1,24 +1,29 @@
+import '../../styles/global.scss'
+import '../../styles/table.scss'
 
-import '../../styles/table'
 
-export function Table() {
+interface RepositoryItemProps {
+    repository: {
+        name: string;
+        description: string;
+        html_url: string;
+    }
+}
+
+
+export function Table(props: RepositoryItemProps) {
     return (
         <>
             <table >
                 <tr>
-                    <th>Person 1</th>
-                    <th>Person 2</th>
-                    <th>Person 3</th>
+                    <th>Nome</th>
+                    <th>Descricao</th>
+                    <th>Link</th>
                 </tr>
                 <tr>
-                    <td>Emil</td>
-                    <td>Tobias</td>
-                    <td>Linux</td>
-                </tr>
-                <tr>
-                    <td>16</td>
-                    <td>14</td>
-                    <td>10</td>
+                    <td><strong> {props.repository.name} </strong></td>
+                    <td><p>{props.repository.description}</p></td>
+                    <td><a target="_blank" href={props.repository.html_url}>Acessar Repositório</a></td>
                 </tr>
             </table>
 
