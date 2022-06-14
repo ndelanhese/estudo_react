@@ -1,9 +1,9 @@
-import { RepositoryItem } from "./RepositoryItem";
+import { Table } from "./table/Table";
 import '../styles/repositories.scss';
 import { useState, useEffect } from "react";
 
-interface Repository{
-    name: string;   
+interface Repository {
+    name: string;
     description: string;
     html_url: string;
 }
@@ -22,7 +22,7 @@ export function RepositoryList() {
             <ul>
                 {
                     repositories.map(repository => {
-                        return <RepositoryItem key={repository.name} repository={repository} />
+                        return <Table key={repository.name} repository={repository} />
                     })
                 }
             </ul>

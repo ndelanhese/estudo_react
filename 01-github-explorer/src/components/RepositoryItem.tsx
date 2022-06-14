@@ -9,11 +9,16 @@ interface RepositoryItemProps {
 }
 
 
-export function RepositoryItem(props: RepositoryItemProps) {
-    return (
-        <li>
-            <Table key={props.repository.name} repository={props.repository} />
 
+export function RepositoryItem(props: RepositoryItemProps) {
+    
+    
+    return (
+
+    
+
+        <li>
+           
         </li>
     );
 }

@@ -10,21 +10,27 @@ interface RepositoryItemProps {
     }
 }
 
+
+
 function verifica(props: RepositoryItemProps) {
-    
-    if(props.repository.description == null){
+
+    if (props.repository.description == null) {
         return "The repository description is empty.";
-    }else{
+    } else {
         return props.repository.description;
     }
 }
+
 
 export function Table(props: RepositoryItemProps) {
     return (
         <>
             <table >
+
+
+
                 <tr>
-                    <th>Nome:</th>
+                    <th >Nome:</th>
                     <th>Descrição:</th>
                     <th>Link:</th>
                 </tr>
