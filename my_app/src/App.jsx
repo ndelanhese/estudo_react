@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css"
+import AddButton from "./components/AddButton";
 import Tasks from "./components/Tasks";
 // let message = "Hello, world!";
 
@@ -30,6 +31,7 @@ const App = () => {
   return (
     <>
       <div className="container">
+      <AddButton/>
         <p className="pContainer"><Tasks tasks={task} /></p>
         
       </div>
