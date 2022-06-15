@@ -13,9 +13,10 @@ align-items: center;
     cursor: pointer;
 }
 
-.remove-task-button{
+.remove-task-button, .see-task-button{
     background-color: #444;
     border: none;
     font-size: 24px;
     color: chartreuse;
 }
+

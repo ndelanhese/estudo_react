@@ -21,7 +21,7 @@ const AddButton = ({handleTaskEdition}) => {
                 type="text" className='add-Task-Input'>
             </input>
             <div className='add-Task-button-container'>
-                <Button onClick={handleAddTaskClick}>Adicionar</Button>
+                <Button onClick={handleAddTaskClick}>Add Task</Button>
             </div>
         </div>);
 }
