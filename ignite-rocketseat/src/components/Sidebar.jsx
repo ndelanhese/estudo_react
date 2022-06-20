@@ -14,7 +14,12 @@ const Sidebar = () => {
                 <Avatar src="https://github.com/ndelanhese.png" />
                 <strong>Nathan Delanhese</strong>
                 <span>Web Developer</span>
-                <footer><a href=''> <PencilLine size={20} /> Editar seu perfil</a></footer>
+                <footer>
+                <a href=''> 
+                <PencilLine size={20} />
+                 Editar seu perfil
+                 </a>
+                </footer>
             </div>
 
         </aside>
