@@ -26,7 +26,7 @@ const Post = ({ author, publishedAt, content }: PostProps) => {
 
     const [newCommentText, setNewCommentText] = useState('')
 
-    const [comments, setComments] = useState([''])
+    const [comments, setComments] = useState(['Olá Marilene'])
 
     const publishedDateFormated = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
         locale: ptBR,
