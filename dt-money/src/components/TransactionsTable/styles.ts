@@ -12,5 +12,24 @@ table{
         font-weight: 400;
         padding: 1rem 2rem;
     }
+
+    td{
+        padding: 1rem 2rem;
+        border: 0;
+        background: var(--shape);
+        color: var(--text-body);
+        border-radius: 0.25rem;
+
+        &:first-child{
+            color: var(--text-title);
+        }
+
+        &.deposit{
+            color: var(--green);
+        }
+        &.withDraw{
+            color: var(--red);
+        }
+    }
 }
 `;

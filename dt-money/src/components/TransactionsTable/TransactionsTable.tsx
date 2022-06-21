@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container } from "./styles";
 
 const TransactionsTable = () => {
@@ -14,23 +13,18 @@ const TransactionsTable = () => {
             </thead>
             <tbody>
                 <tr>
-                    <td>Desenvolvimento de WebSite</td>
-                    <td>R$12.000,00</td>
+                    <td >Desenvolvimento de WebSite</td>
+                    <td className='deposit'>R$12.000,00</td>
                     <td>Desenvolvimento</td>
                     <td>20/02/2021</td>
                 </tr>
                 <tr>
-                    <td>Desenvolvimento de WebSite</td>
-                    <td>R$12.000,00</td>
-                    <td>Desenvolvimento</td>
-                    <td>20/02/2021</td>
+                    <td>Aluguel</td>
+                    <td className='withDraw'> - R$850,00</td>
+                    <td>Casa</td>
+                    <td>22/02/2021</td>
                 </tr>
-                <tr>
-                    <td>Desenvolvimento de WebSite</td>
-                    <td>R$12.000,00</td>
-                    <td>Desenvolvimento</td>
-                    <td>20/02/2021</td>
-                </tr>
+                
             </tbody>
         </table>
     </Container>
