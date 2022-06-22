@@ -27,7 +27,7 @@ table{
         &.deposit{
             color: var(--green);
         }
-        &.withDraw{
+        &.withdraw{
             color: var(--red);
         }
     }
