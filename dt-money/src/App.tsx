@@ -4,6 +4,7 @@ import { GlobalStyle } from "./styles/global";
 import Modal from 'react-modal';
 import { useState } from "react";
 import NewTransitionModal from "./components/NewTransactionsModal/NewTransactionModal";
+import TransactionsPorvider, { TransactionsContext } from "./TransactionsContexts";
 
 Modal.setAppElement("#root")
 
@@ -23,7 +24,7 @@ const App = () => {
 
 
   return (
-    <>
+    <TransactionsPorvider>
       <Header onOpenNewTransactionModal={handleOpenNewTrasactionModal} />
       <Dashboard />
 
@@ -34,7 +35,7 @@ const App = () => {
 
 
       <GlobalStyle />
-    </>
+    </TransactionsPorvider>
   );
 }
 
