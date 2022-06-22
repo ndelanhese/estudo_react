@@ -3,9 +3,8 @@ import { Container, TransactionTypeContainer, RadioBox } from '../NewTransaction
 import incomeImage from '../../assets/income.svg';
 import outcomeImage from '../../assets/outcome.svg';
 import closeImg from '../../assets/close.svg'
-import { FormEvent, useState, useContext } from 'react';
-import { api } from '../../services/api';
-import { TransactionsContext } from '../../TransactionsContexts';
+import { FormEvent, useState} from 'react';
+import { useTransactions } from '../../hooks/useTransactions';
 
 interface PropsNewTransitionModal {
     isOpen: boolean;
@@ -16,7 +15,7 @@ interface PropsNewTransitionModal {
 const NewTransitionModal = ({ isOpen, onRequestClose }: PropsNewTransitionModal) => {
 
 
-    const { createTransaction } = useContext(TransactionsContext);
+    const { createTransaction } = useTransactions();
 
     const [title, setTitle] = useState('');
     const [value, setValue] = useState(0);

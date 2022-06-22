@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect, ReactNode } from 'react';
-import { api } from "./services/api";
+import { createContext, useState, useEffect, ReactNode, useContext } from 'react';
+import { api } from "../services/api";
 
 interface TransactionsContextDate{
 transactions: Transactions[];
@@ -55,4 +55,10 @@ const TransactionsPorvider = ({ children }: TransactionsProviderProps) => {
 }
 
 export default TransactionsPorvider;
+
+ export function useTransactions() {
+    const context = useContext(TransactionsContext);
+    
+    return context;
+}
 
