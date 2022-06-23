@@ -1,10 +1,11 @@
-import {FaGithub} from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 
-export function SingInButton(){
+
+export function SingInButton() {
     return (
 
         <button type="button">
-            <FaGithub/>
+            <FaGithub />
             Sing in with GitHub 
         </button>
 
