@@ -2,8 +2,8 @@ import { FaGithub } from 'react-icons/fa';
 import { FiX } from 'react-icons/fi';
 import styles from './styles.module.scss';
 
-export default function SingInButton() {
-    const isUserLoggedIn = true;
+export function SingInButton() {
+    const isUserLoggedIn = false;
 
     return isUserLoggedIn ? (
     <button type="button"

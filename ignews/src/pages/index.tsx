@@ -1,5 +1,5 @@
 import Head from '../../node_modules/next/head'
-import MyHome from '../components/MyHome/MyHome';
+import Start from '../components/Start/Start';
 
 
 export default function Home() {
@@ -8,7 +8,8 @@ export default function Home() {
       <Head>
         <title>Home | ig.news</title>
       </Head>
-      <MyHome />
+
+      <Start />
 
     </>
   )
