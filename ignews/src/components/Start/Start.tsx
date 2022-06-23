@@ -1,7 +1,11 @@
 import SubscribeButton from '../SubscribeButton/SubscribeButton';
 import styles from './styles.module.scss';
 
-const MyHome = () => {
+interface HomeProps {
+    priceId: string;
+    amountE: number;
+}
+const MyHome = ({ amountE, priceId }: HomeProps) => {
     return (
 
         <main className={styles.contentContainer}>
@@ -14,10 +18,10 @@ const MyHome = () => {
                 </h1>
                 <p>Get access to all the publications <br />
                     <span>
-                        for $9.90 month
+                        for {amountE} month
                     </span>
                 </p>
-                <SubscribeButton/>
+                <SubscribeButton priceId={priceId} />
             </section>
             <img src='/assets/images/avatar.svg' alt='Girl Codding' />
         </main>
