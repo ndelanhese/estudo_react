@@ -1,17 +1,18 @@
 import Head from '../../node_modules/next/head'
 import Start from '../components/Start/Start';
 
-import { GetServerSideProps } from 'next';
-import {stripe} from '../services/stripe';
 
-interface HomeProps{
-  product:{
+import { GetStaticProps } from 'next';
+import { stripe } from '../services/stripe';
+
+interface HomeProps {
+  product: {
     priceId: string;
     amount: number;
   }
 }
 
-export default function Home({product}: HomeProps) {
+export default function Home({ product }: HomeProps) {
   return (
     <>
       <Head>
@@ -25,15 +26,15 @@ export default function Home({product}: HomeProps) {
 }
 
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
 
-  const price = await stripe.prices.retrieve('price_1LDtauA4qC8zWv81ZFRfd2CZ', { 
-apiKey: 'sk_test_51LDtVnA4qC8zWv81GRuTrlrLyibSQdzPn5cll4xtJfBmRQ5KwIhgvsO3OfEmb979HXBKCnuIF7ibrNuFU9JhHYw300AqF4b5nq'
-})
+  const price = await stripe.prices.retrieve('price_1LDtauA4qC8zWv81ZFRfd2CZ', {
+    apiKey: 'sk_test_51LDtVnA4qC8zWv81GRuTrlrLyibSQdzPn5cll4xtJfBmRQ5KwIhgvsO3OfEmb979HXBKCnuIF7ibrNuFU9JhHYw300AqF4b5nq'
+  })
 
   const product = {
     priceId: price.id,
-    amount: new Intl.NumberFormat('en-US',{
+    amount: new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
     }).format(price.unit_amount / 100),
@@ -43,6 +44,8 @@ apiKey: 'sk_test_51LDtVnA4qC8zWv81GRuTrlrLyibSQdzPn5cll4xtJfBmRQ5KwIhgvsO3OfEmb9
   return {
     props: {
       product
-    }
+    },
+    revalidate: 60 * 60 * 24, // 24 hours
   }
+
 }
