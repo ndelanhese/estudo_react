@@ -1,5 +1,5 @@
 import { AppProps } from "../../node_modules/next/app"
-import { Header } from "../components/header/header";
+import { Header } from "../components/Header/header";
 import '../styles/global.scss';
 
 function MyApp({ Component, pageProps }: AppProps) {

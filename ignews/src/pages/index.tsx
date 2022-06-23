@@ -1,15 +1,15 @@
 import Head from '../../node_modules/next/head'
-
+import MyHome from '../components/MyHome/MyHome';
 
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Início | ig.news</title>
+        <title>Home | ig.news</title>
       </Head>
+      <MyHome />
 
-      <h1 >Hello World</h1>
     </>
   )
 }
