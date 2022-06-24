@@ -1,14 +1,17 @@
-import { AppProps } from "../../node_modules/next/app"
+
 import { Header } from "../components/Header/header";
+import { SessionProvider } from "next-auth/react";
 import '../styles/global.scss';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component,
+   pageProps: { session, ...pageProps },
+  }) {
   return (
-    <>
+    <SessionProvider session={session}>
       <Header />
       <Component {...pageProps} />
-    </>
+    </SessionProvider>
   );
 }
 
-export default MyApp
+export default MyApp;
