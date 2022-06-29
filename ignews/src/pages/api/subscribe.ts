@@ -3,17 +3,20 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 
 
-export default async (req: NextApiRequest, res: NextApiResponse)=> {
+export default async function handle(req: NextApiRequest, res: NextApiResponse){
     
-   
-        if (req.method === "POST") {
+           if (req.method === "POST") {
             const session = await getSession({ req });
             const stripeCustomer = await stripe.customers.create({
+
                 email: session.user.email,
             })
     
             const stripeCheckoutSession = await stripe.checkout.sessions.create({
                 customer: stripeCustomer.id,
+                
+                   
+                
                 payment_method_types: ['card'],
                 billing_address_collection: 'required',
                 line_items: [
@@ -30,6 +33,7 @@ export default async (req: NextApiRequest, res: NextApiResponse)=> {
         } else {
             res.setHeader("Allow", "POST");
             res.status(405).end("Method Not Allowed");
+            
         }
     
 
