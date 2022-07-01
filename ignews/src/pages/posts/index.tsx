@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 import { GetStaticProps } from "next";
 import { getPrismicCLient } from "../../services/prismic";
 import { RichText } from "prismic-dom";
+import Link from "../../../node_modules/next/link";
 
 interface Post {
   slug: string;
@@ -24,11 +25,13 @@ export default function Posts({ posts }: PostProps) {
       <main className={styles.container}>
         <div className={styles.posts}>
           {posts.map((post) => (
-            <a key={post.slug} href="#">
-              <time>{post.updatedAt}</time>
-              <strong>{post.title}</strong>
-              <p>{post.excertp}</p>
-            </a>
+            <Link key={post.slug} href={`/posts/${post.slug}`}>
+              <a>
+                <time>{post.updatedAt}</time>
+                <strong>{post.title}</strong>
+                <p>{post.excertp}</p>
+              </a>
+            </Link>
           ))}
         </div>
       </main>
@@ -44,7 +47,7 @@ export const getStaticProps: GetStaticProps = async () => {
     pageSize: 100,
   });
 
- 
+
 
   const posts = response.map((post) => {
     return {
@@ -53,6 +56,7 @@ export const getStaticProps: GetStaticProps = async () => {
       excertp:
         post.data.content.find((content) => content.type === "paragraph")
           ?.text ?? '',
+        
       updatedAt: new Date(post.last_publication_date).toLocaleDateString(
         "pt-BR",
         {

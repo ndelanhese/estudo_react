@@ -2,16 +2,13 @@ import { SignInButton } from "../SignInButton/SignInButton";
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { ActiveLink } from "../ActiveLink/ActiveLink";
 
 export function Header() {
-
-const {asPath} = useRouter()
-
   return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
-        <Link href="/" >
+        <Link href="/">
           <a>
             <Image
               src="/assets/images/logo.svg"
@@ -22,12 +19,12 @@ const {asPath} = useRouter()
           </a>
         </Link>
         <nav>
-          <Link href="/" >
-            <a className={asPath === '/' ? styles.active : ''}>Home</a>
-          </Link>
-          <Link href="/posts" prefetch >
+          <ActiveLink activeClassName={styles.active} href="/">
+            <a>Home</a>
+          </ActiveLink>
+          <ActiveLink href="/posts" activeClassName={styles.active}>
             <a>Posts</a>
-          </Link>
+          </ActiveLink>
         </nav>
         <SignInButton />
       </div>
