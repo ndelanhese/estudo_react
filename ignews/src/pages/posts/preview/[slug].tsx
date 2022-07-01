@@ -19,17 +19,15 @@ interface PostPreviewProps {
 }
 
 export default function PostPreview({ post }: PostPreviewProps) {
+  const { data: session } = useSession();
 
-const  {data: session} = useSession();
-
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-if(session?.activeSubscription){
-  router.push(`/posts/${post.slug}`);
-  
-}
-  }, [session])
+    if (session?.activeSubscription) {
+      router.push(`/posts/${post.slug}`);
+    }
+  }, [session]);
 
   return (
     <>
@@ -45,11 +43,9 @@ if(session?.activeSubscription){
             dangerouslySetInnerHTML={{ __html: post.content }}
           ></div>
           <div className={styles.continueReading}>
-            Wanna continue Reading? 
+            Wanna continue Reading?
             <Link href="/">
-            <a>
-              Subscribe now 🤗
-            </a>
+              <a>Subscribe now 🤗</a>
             </Link>
           </div>
         </article>
@@ -61,7 +57,7 @@ if(session?.activeSubscription){
 export const getStaticPaths = () => {
   return {
     paths: [],
-    fallback: 'blocking',
+    fallback: "blocking",
   };
 };
 
@@ -89,5 +85,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       post,
     },
+    redirect: 60 * 30, // 30 minutes
   };
 };
