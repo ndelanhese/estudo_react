@@ -1,6 +1,7 @@
 import { Box, Flex, SimpleGrid, Text, theme } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import { Header } from "../components/Header";
+
 import { Sidebar } from "../components/Sidebar";
 const Chart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
@@ -8,6 +9,7 @@ const Chart = dynamic(() => import('react-apexcharts'), {
 //Carrega o componente dinamico somente no browser
 
 const options = {chart: {
+  
   toolbar:{
     show: false,
   },
@@ -23,7 +25,7 @@ dataLabels:{
   enabled:false
 },
 tooltip:{
-  enable:false
+  enabled:false
 }, 
 xaxis:{
   type: 'datetime',
@@ -59,7 +61,7 @@ const series = [{ name: "series1", data: [31, 120, 10, 28, 61, 10, 59] }];
 export default function Dashboard() {
   return (
     <Flex direction="column" h="100vh">
-      <Header />
+      <Header/>
       <Flex w="100%" my={6} maxWidth={1480} mx="auto" px={6}>
         <Sidebar />
 
