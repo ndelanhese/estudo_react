@@ -30,7 +30,7 @@ export default function CreateUser() {
           </VStack>
 
           <Flex mt={8} justify="flex-end"> 
-    <HStack spcing={4}>
+    <HStack spacing={4}>
 <Button colorScheme="whiteAlpha">
     <Icon as={RiCloseLine} fontSize={16} mr={1}/>
 Cancel
