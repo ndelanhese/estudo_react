@@ -35,7 +35,7 @@ export function Header() {
         ></IconButton>
       )}
 
-      <Logo />
+      <Logo showProfileData={isWideVersion} />
       {isWideVersion && <SearchBox />}
 
       <Flex align="center" ml="auto">
