@@ -4,7 +4,7 @@ import Link from "next/link";
 export function Logo(){
     return(
       
-      <Link href="/dashboard" target="_blank">
+      <Link href="/dashboard" passHref>
         <a>
           <Text fontSize={["2xl","3xl"]} fontWeight="bold" letterSpacing="tight" w={["auto", "64"]}>
             dashgo
