@@ -6,7 +6,7 @@ export function Logo(){
       
       <Link href="/dashboard" target="_blank">
         <a>
-          <Text fontSize="3xl" fontWeight="bold" letterSpacing="tight" w="64">
+          <Text fontSize={["2xl","3xl"]} fontWeight="bold" letterSpacing="tight" w={["auto", "64"]}>
             dashgo
             <Text color="pink.500" as="span" ml="1">
               .

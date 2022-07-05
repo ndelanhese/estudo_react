@@ -71,7 +71,7 @@ export default function Dashboard() {
           minChildWidth="320px" //Se for menor que 320px ela quebra linha
           alignItems="flex-start"
         >
-          <Box p={8} bg="gray.800" borderRadius={8} pb={4}>
+          <Box p={["6", "8"]} bg="gray.800" borderRadius={8} pb={4}>
             <Text fontSize="large" mb={4}>
               Week subscribes
             </Text>
