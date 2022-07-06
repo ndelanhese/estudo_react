@@ -26,7 +26,7 @@ import { useEffect } from "react";
 import { useQuery } from "react-query";
 
 export default function UserList() {
-  const { data, isLoading, error } = useQuery(
+  const { data, isLoading, isFetching, error } = useQuery(
     "users",
     async () => {
       const response = await fetch("http://localhost:3000/api/users");
