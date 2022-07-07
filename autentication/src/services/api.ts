@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { parseCookies, setCookie } from "nookies";
+import { signOut } from "../contexts/AuthContext";
 
 // pego todos os cookies da minha aplicação
 let cookies = parseCookies();
@@ -24,9 +25,7 @@ export const api = axios.create({
 // intercepto a resposta da minha api e faço uma verificação
 api.interceptors.response.use(
   // se ela for ok somente devolve da mesma maneira que veio
-  (response) => {
-    return response;
-  },
+  (response) => response,
   // se ela der erro
   (error: AxiosError) => {
     // faz a verificação se tem erro 401 que é negar acesso
@@ -37,6 +36,7 @@ api.interceptors.response.use(
 
         // atualiza a variavel que contem os cookies
         cookies = parseCookies();
+
 
         // pego de dentro de cookies o meu refreshToken
         const { "autentication.refreshToken": refreshToken } = cookies;
@@ -49,12 +49,16 @@ api.interceptors.response.use(
           isRefreshing = true;
 
           // faço uma requisição para a api de refresh passando meu refreshToken
-          api
-            .post("/refresh", {
+          api.post('/refresh', {
               refreshToken,
             })
             .then((response) => {
+              
+
+              console.log(response.data)
+
               // pego o meu token da resposta
+
               const { token } = response.data;
 
               // função da lib nookies para salvar os cookies
@@ -63,18 +67,19 @@ api.interceptors.response.use(
                 maxAge: 60 * 60 * 24 * 30, // 30 days
                 // quais locais do meu app vão poder acessar o cookie (/) é todos
                 path: "/",
-                sameSite: "none",
+                 sameSite: "none",
               });
+
               setCookie(
                 undefined,
-                "autentication.refreshtoken",
+                "autentication.refreshToken",
                 response.data.refreshToken,
                 {
                   // validade do cookie em storage
                   maxAge: 60 * 60 * 24 * 30, // 30 days
                   // quais locais do meu app vão poder acessar o cookie (/) é todos
                   path: "/",
-                  sameSite: "none",
+                   sameSite: "none",
                 }
               );
 
@@ -83,7 +88,7 @@ api.interceptors.response.use(
               api.defaults.headers["Authorization"] = `Bearer ${token}`;
 
               // vou dentro da minha pilha e pra cada indice eu executo o metodo atulizando o token
-              failedRequestQueue.forEach((request) => request.onSucess(token));
+              failedRequestQueue.forEach((request) => request.onSuccess(token));
 
               // Após o processo eu limpo a pilha
               failedRequestQueue = [];
@@ -121,7 +126,10 @@ api.interceptors.response.use(
         });
       } else {
         //deslogar o usuario
+        signOut();
       }
     }
+
+    return Promise.reject(error);
   }
 );
