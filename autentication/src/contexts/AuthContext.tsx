@@ -1,7 +1,8 @@
 import  Router from "next/router";
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { api } from "../services/api";
+import { setupAPIClient } from "../services/api";
 import { setCookie, parseCookies, destroyCookie } from "nookies";
+import { api } from "../services/apiClient";
 // Cria uma tipagem do que é necessário para criar um SignIn
 type SignInCredentials = {
   email: string;
