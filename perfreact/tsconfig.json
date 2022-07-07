@@ -6,7 +6,6 @@
       "dom.iterable",
       "esnext"
     ],
-   
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -15,9 +14,9 @@
     "incremental": true,
     "esModuleInterop": true,
     "module": "esnext",
+    "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "resolveJsonModule": true,
     "moduleResolution": "node"
   },
   "include": [
