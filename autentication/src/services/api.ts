@@ -55,7 +55,7 @@ export function setupAPIClient(ctx = undefined) {
                 refreshToken,
               })
               .then((response) => {
-                console.log(response.data);
+               
 
                 // pego o meu token da resposta
 
