@@ -67,7 +67,7 @@ api.interceptors.response.use(
                 maxAge: 60 * 60 * 24 * 30, // 30 days
                 // quais locais do meu app vão poder acessar o cookie (/) é todos
                 path: "/",
-                 sameSite: "none",
+                 
               });
 
               setCookie(
@@ -79,7 +79,7 @@ api.interceptors.response.use(
                   maxAge: 60 * 60 * 24 * 30, // 30 days
                   // quais locais do meu app vão poder acessar o cookie (/) é todos
                   path: "/",
-                   sameSite: "none",
+                   
                 }
               );
 

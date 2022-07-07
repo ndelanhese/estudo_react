@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { api } from "../services/api";
+import styles from '../styles/Home.module.scss';
 export function Dashboard() {
   const { user } = useContext(AuthContext);
 
@@ -10,5 +11,9 @@ export function Dashboard() {
     });
   }, []);
 
-  return <h1>Dashboard: {user?.email}</h1>;
+  return(
+
+  <h1 >Dashboard: {user?.email}</h1>
+  
+  );
 }

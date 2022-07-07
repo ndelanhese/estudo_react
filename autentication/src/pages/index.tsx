@@ -1,6 +1,9 @@
+import { GetServerSideProps } from "next";
 import { FormEvent, useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import styles from "../styles/Home.module.scss";
+
+import { withSSRGuest } from "../utils/withSSRGuest";
 
 export default function Home() {
   //Estado de um atributo do react
@@ -48,3 +51,12 @@ export default function Home() {
     </form>
   );
 }
+
+// Método SSR (O getServerSideProps) é executado pelo lado do server antes de aparecer algo
+// O parametro ctx ele passa todas as informações do client para o server (usando req.cookies)
+// posso pegar os cookies
+export const getServerSideProps = withSSRGuest(async (ctx) => {
+  return {
+    props: {},
+  };
+});
