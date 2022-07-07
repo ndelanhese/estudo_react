@@ -6,17 +6,9 @@ import { withSSRAuth } from "../utils/withSSRAuth";
 import { AuthTokenError } from "../errors/AuthTokenError";
 import { destroyCookie } from "nookies";
 import { useCan } from "../hooks/useCan";
+import { Can } from "./Can";
 export function Dashboard() {
   const { user } = useContext(AuthContext);
-
-  // verifica dentro do meu hook se o usuario tem as devidas permissions
-  const userCanSeeMetrics = useCan({
-    // Verifica se ele tem a permissions de metrics.list
-    permissions: ["metrics.list"],
-
-    // verifica se ele tem o cargo de ou editor ou administrator
-    roles: ["administrator", 'editor'],
-  });
 
   useEffect(() => {
     api
@@ -29,8 +21,10 @@ export function Dashboard() {
     <>
       <h1>Dashboard: {user?.email}</h1>
 
-      {/* se ele tem permissions, ele mostra */}
-      {userCanSeeMetrics && <div>Métricas</div>}
+      {/*Verifica utilizando o component a permission, se ele tem permissions, ele mostra */}
+      <Can permissions={["metrics.list"]}>
+        <div>Métricas</div>
+      </Can>
     </>
   );
 }
