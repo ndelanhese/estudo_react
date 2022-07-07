@@ -3,6 +3,8 @@ import { AuthContext } from "../contexts/AuthContext";
 import { setupAPIClient } from "../services/api";
 import { api } from "../services/apiClient";
 import { withSSRAuth } from "../utils/withSSRAuth";
+import { AuthTokenError } from "../errors/AuthTokenError";
+import { destroyCookie } from "nookies";
 export function Dashboard() {
   const { user } = useContext(AuthContext);
 
@@ -23,9 +25,20 @@ export function Dashboard() {
 // posso pegar os cookies
 export const getServerSideProps = withSSRAuth(async (ctx) => {
   const apiClient = setupAPIClient(ctx);
-  const response = await apiClient.get("/me");
 
+  try {
+    const response = await apiClient.get("/me");
+  } catch (err) {
+    destroyCookie(ctx, "autentication.token");
+    destroyCookie(ctx, "autentication.refreshToken");
 
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {},
