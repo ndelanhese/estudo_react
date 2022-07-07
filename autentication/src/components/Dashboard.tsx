@@ -3,12 +3,9 @@ import { AuthContext } from "../contexts/AuthContext";
 import { setupAPIClient } from "../services/api";
 import { api } from "../services/apiClient";
 import { withSSRAuth } from "../utils/withSSRAuth";
-import { AuthTokenError } from "../errors/AuthTokenError";
-import { destroyCookie } from "nookies";
-import { useCan } from "../hooks/useCan";
 import { Can } from "./Can";
 export function Dashboard() {
-  const { user } = useContext(AuthContext);
+  const { user, buttonsignOut } = useContext(AuthContext);
 
   useEffect(() => {
     api
@@ -20,6 +17,8 @@ export function Dashboard() {
   return (
     <>
       <h1>Dashboard: {user?.email}</h1>
+
+      <button onClick={buttonsignOut}>Sign Out</button>
 
       {/*Verifica utilizando o component a permission, se ele tem permissions, ele mostra */}
       <Can permissions={["metrics.list"]}>

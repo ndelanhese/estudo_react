@@ -1,8 +1,9 @@
-import  Router from "next/router";
+import Router from "next/router";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { setupAPIClient } from "../services/api";
 import { setCookie, parseCookies, destroyCookie } from "nookies";
 import { api } from "../services/apiClient";
+
 // Cria uma tipagem do que é necessário para criar um SignIn
 type SignInCredentials = {
   email: string;
@@ -12,7 +13,10 @@ type SignInCredentials = {
 //tipagem do meu context
 type AuthContextData = {
   //Promise<void> é uma chamada para API, no entanto sem retorno
-  signIn(credentials: SignInCredentials): Promise<void>;
+  signIn: (credentials: SignInCredentials) => Promise<void>;
+  signOut: () => void;
+  buttonsignOut: () => void;
+  buttonsignIn: () => void;
   user: User;
   isAuthenticated: boolean;
 };
@@ -29,23 +33,53 @@ type User = {
   roles: string[];
 };
 
-export function signOut(){
-  destroyCookie(undefined, 'autentication.token')
-  destroyCookie(undefined, 'autentication.refreshToken')
-  
- Router.push('/')
+export function signOut() {
+  destroyCookie(undefined, "autentication.token");
+  destroyCookie(undefined, "autentication.refreshToken");
+
+  //chamo o brodcast de signout
+  // authChannel.postMessage("signOut");
+
+  Router.push("/");
+}
+
+export function buttonsignOut() {
+  //chamo o brodcast de signout
+  authChannel.postMessage("signOut");
+}
+
+export function buttonsignIn() {
+  //chamo o brodcast de signIn
+  authChannel.postMessage("signIn");
 }
 
 
 // Informa que ao criar um contexto eu preciso usar o meu type AuthContextData
 export const AuthContext = createContext({} as AuthContextData);
 
+// crio uma constande de broadcast para poder deslogar todas as telas posteriormente
+let authChannel: BroadcastChannel;
+
 // Export uma function com as children
 export function AuthProvider({ children }: AuthProviderProps) {
   // cria um estado para armazenar os dados do usuario
   const [user, setUser] = useState<User>();
 
+  //useEffect para que quando eu chamar o brodcast eu realize uma function
+  useEffect(() => {
+    authChannel = new BroadcastChannel("auth");
 
+    authChannel.onmessage = (message) => {
+      switch (message.data) {
+        case "signOut":
+          signOut();
+          break;
+      
+        default:
+          break;
+      }
+    };
+  }, []);
 
   // Realiza a ação sempre que a pagina é carregada (useEffectt)
   useEffect(() => {
@@ -58,23 +92,24 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (token) {
       // busco na minha api de autenticação dentro da rota me, e pego os dados retornados
       //passando a resposta para uma arrow function
-      api.get("/me").then((response) => {
-        // pegando os dados da resposta e passando para uma constante
-        const { email, permissions, roles } = response.data;
+      api
+        .get("/me")
+        .then((response) => {
+          // pegando os dados da resposta e passando para uma constante
+          const { email, permissions, roles } = response.data;
 
-        // estou colocando as respostas dentro do meu estado
-        setUser({ email, permissions, roles });
-      }).catch(()=> {
-        signOut();
-      })
+          // estou colocando as respostas dentro do meu estado
+          setUser({ email, permissions, roles });
+        })
+        .catch(() => {
+          signOut();
+        });
     }
   }, []);
 
   // cria uma constante para guardar a information de que se está autenticado verificando
   // se o estado está verdadeiro (preenchido) ou falso (vazio)
   const isAuthenticated = !!user;
-
-
 
   // Funtion de criar um signIn, já tipado para manter o editor inteligente
   //(Para retornar uma promise ela tem que ser async)
@@ -118,11 +153,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       // Estou atualizando a minha header da api enviando o token quando ele está autenticado
       // antes disso ela fica com o token Undefined
-      api.defaults.headers['Authorization'] = `Bearer ${token}`
+      api.defaults.headers["Authorization"] = `Bearer ${token}`;
 
       // Redireciono se está tudo autorizado para dentro da pagina dashboard
-      Router.push('/dashboard')
-      
+      Router.push("/dashboard");
+
+      // authChannel.postMessage("signIn");
     } catch (err) {
       console.log(err);
     }
@@ -130,7 +166,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     // retorna o context provider chamdo a minha function
-    <AuthContext.Provider value={{ signIn, isAuthenticated, user }}>
+    <AuthContext.Provider
+      value={{ signIn, signOut, buttonsignOut, buttonsignIn, isAuthenticated, user }}
+    >
       {children}
     </AuthContext.Provider>
   );

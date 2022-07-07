@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import { FormEvent, useContext, useState } from "react";
-import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext, buttonsignIn } from "../contexts/AuthContext";
 import styles from "../styles/Home.module.scss";
 
 import { withSSRGuest } from "../utils/withSSRGuest";
@@ -26,6 +26,8 @@ export default function Home() {
 
     // chamo meu metodo do AuthContext passando minhas informações do input
     await signIn(data);
+
+    buttonsignIn();
   }
 
   return (
@@ -47,7 +49,7 @@ export default function Home() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button type="submit">Submit</button>
+      <button type="submit" >Submit</button>
     </form>
   );
 }

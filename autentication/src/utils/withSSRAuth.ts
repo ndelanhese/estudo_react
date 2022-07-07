@@ -8,22 +8,23 @@ import { AuthTokenError } from "../errors/AuthTokenError";
 import decode from "jwt-decode";
 import { validadeUserPermissions } from "./validadeUserPermissions";
 
-type withSSRAuthOptions = {
+type WithSSRAuthOptions = {
   permissions?: string[];
   roles?: string[];
 };
 
 export function withSSRAuth<P>(
   fn: GetServerSideProps<P>,
-  options?: withSSRAuthOptions
+  options?: WithSSRAuthOptions
 ) {
   return async (
     ctx: GetServerSidePropsContext
   ): Promise<GetServerSidePropsResult<P>> => {
     // eu uso o conversor para pegar todos os meus cookies da requisição do meu contexto
     const cookies = parseCookies(ctx);
-
-    const token = cookies["autentication.token"];
+   
+    
+    const token = cookies['autentication.token'];
 
     // Se não tenho um cookie, eu já redireciono o meu client direto para o login!
     if (!token) {
@@ -35,8 +36,10 @@ export function withSSRAuth<P>(
       };
     }
 
+    
+
     if (options) {
-      const user = decode<{ permissions: string[]; roles: string[] }>(token);
+      const user = decode<{ permissions: string[], roles: string[] }>(token);
       const { permissions, roles } = options;
 
       const userHasValidPermissions = validadeUserPermissions({

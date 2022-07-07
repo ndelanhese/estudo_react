@@ -14,11 +14,11 @@ export function useCan({ permissions, roles }: UseCanProps) {
     return false;
   }
 
-  const userHasValidPermissions = validadeUserPermissions(
-   { user,
+  const userHasValidPermissions = validadeUserPermissions({
+    user,
     permissions,
-    roles,}
-  );
+    roles,
+  });
 
   return userHasValidPermissions;
 }

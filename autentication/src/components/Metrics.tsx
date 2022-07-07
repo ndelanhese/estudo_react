@@ -3,7 +3,7 @@ import { withSSRAuth } from "../utils/withSSRAuth";
 
 
 export function Metrics() {
-  return <h1>Metrics</h1>;
+  return (<h1>Metrics</h1>);
 }
 
 // Método SSR (O getServerSideProps) é executado pelo lado do server antes de aparecer algo
@@ -19,6 +19,6 @@ export const getServerSideProps = withSSRAuth(async (ctx) => {
   }
 }, {
     // aqui eu estou passando quais são os requisitos para acessar a pagina
-    permissions: ['metricas.list'],
-    roles: ['administrator'],
+    permissions: ['metrics.list'],
+    roles: ['administrator']
 });
