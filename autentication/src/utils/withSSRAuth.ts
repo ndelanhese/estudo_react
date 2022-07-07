@@ -4,6 +4,7 @@ import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
 } from "next";
+import { AuthTokenError } from "../errors/AuthTokenError";
 
 export function withSSRAuth<P>(fn: GetServerSideProps<P>) {
   return async (
@@ -25,15 +26,17 @@ export function withSSRAuth<P>(fn: GetServerSideProps<P>) {
     try {
       return await fn(ctx);
     } catch (err) {
-      destroyCookie(ctx, "autentication.token");
-      destroyCookie(ctx, "autentication.refreshToken");
+      if (err instanceof AuthTokenError) {
+        destroyCookie(ctx, "autentication.token");
+        destroyCookie(ctx, "autentication.refreshToken");
 
-      return {
-        redirect: {
-          destination: "/",
-          permanent: false,
-        },
-      };
+        return {
+          redirect: {
+            destination: "/",
+            permanent: false,
+          },
+        };
+      }
     }
   };
 }
