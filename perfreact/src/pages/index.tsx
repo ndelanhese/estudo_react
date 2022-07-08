@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <>
       <Head>
+        
         <title>Hello World</title>
       </Head>
       <h1>Hello World</h1>

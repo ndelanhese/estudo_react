@@ -1,4 +1,4 @@
-import { Button, Flex, Stack } from "@chakra-ui/react";
+import { Button, Flex, InputProps, Stack } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../components/Form/Input";
 import * as yup from "yup";
@@ -27,9 +27,9 @@ export default function SignIn() {
       <Flex
         as="form"
         width="100%"
-        maxWidth={360}
+        maxWidth="360"
         bg="gray.800"
-        p={8}
+        p="8"
         borderRadius="8"
         flexDir="column"
         onSubmit={handleSubmit(handleSignIn)}
@@ -42,7 +42,7 @@ export default function SignIn() {
             label="Email"
             error={errors.email}
             {...register('email')}
-          ></Input>
+          />
           
 
           <Input
@@ -53,7 +53,7 @@ export default function SignIn() {
             error={errors.password}
             //{...register("password", { required: "Senha Obrigatória" })}
             {...register('password')}
-          ></Input>
+         />
         </Stack>
         <Button
           type="submit"

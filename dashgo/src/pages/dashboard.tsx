@@ -1,68 +1,68 @@
 import { Box, Flex, SimpleGrid, Text, theme } from "@chakra-ui/react";
+import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
 import { Header } from "../components/Header";
 
 import { Sidebar } from "../components/Sidebar";
-const Chart = dynamic(() => import('react-apexcharts'), {
+const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 //Carrega o componente dinamico somente no browser
 
-const options = {chart: {
-  
-  toolbar:{
+const options: ApexOptions = {
+  chart: {
+    toolbar: {
+      show: false,
+    },
+    zoom: {
+      enabled: false,
+    },
+    foreColor: theme.colors.gray[500],
+  },
+  grid: {
     show: false,
   },
-  zoom:{
-    enable: false
-  }, 
-  foreColor: theme.colors.gray[500],
-},
-grid:{
-  show: false,
-},
-dataLabels:{
-  enabled:false
-},
-tooltip:{
-  enabled:false
-}, 
-xaxis:{
-  type: 'datetime',
-  axiosBorder:{
-    color: theme.colors.gray[600]
+  dataLabels: {
+    enabled: false,
   },
-  axisTicks:{
-    color: theme.colors.gray[600]
+  tooltip: {
+    enabled: false,
   },
-  categories:[
-    '2021-03-18T00:00:00.000Z',
-    '2021-03-19T00:00:00.000Z',
-    '2021-03-20T00:00:00.000Z',
-    '2021-03-21T00:00:00.000Z',
-    '2021-03-22T00:00:00.000Z',
-    '2021-03-23T00:00:00.000Z',
-    '2021-03-24T00:00:00.000Z',
-  ],
-},
-fill:{
-  opacity: 0.3,
-  type: 'gradient',
-  gradient: {
-    shade: 'dark',
-    opacityFrom: 0.7,
-    opacityTo: 0.3
-  }
-}
-
+  xaxis: {
+    type: "datetime",
+    axisBorder: {
+      color: theme.colors.gray[600],
+    },
+    axisTicks: {
+      color: theme.colors.gray[600],
+    },
+    categories: [
+      "2021-03-18T00:00:00.000Z",
+      "2021-03-19T00:00:00.000Z",
+      "2021-03-20T00:00:00.000Z",
+      "2021-03-21T00:00:00.000Z",
+      "2021-03-22T00:00:00.000Z",
+      "2021-03-23T00:00:00.000Z",
+      "2021-03-24T00:00:00.000Z",
+    ],
+  },
+  fill: {
+    opacity: 0.3,
+    type: "gradient",
+    gradient: {
+      shade: "dark",
+      opacityFrom: 0.7,
+      opacityTo: 0.3,
+    },
+  },
 };
 const series = [{ name: "series1", data: [31, 120, 10, 28, 61, 10, 59] }];
 
 export default function Dashboard() {
   return (
     <Flex direction="column" h="100vh">
-      <Header/>
-      <Flex w="100%" my={6} maxWidth={1480} mx="auto" px={6}>
+      <Header />
+      <Flex w="100%" my="6" maxWidth="1480" mx="auto" px="6">
         <Sidebar />
 
         <SimpleGrid
@@ -71,17 +71,17 @@ export default function Dashboard() {
           minChildWidth="320px" //Se for menor que 320px ela quebra linha
           alignItems="flex-start"
         >
-          <Box p={["6", "8"]} bg="gray.800" borderRadius={8} pb={4}>
+          <Box p={["6", "8"]} bg="gray.800" borderRadius="8" pb="4">
             <Text fontSize="large" mb={4}>
               Week subscribes
             </Text>
-            <Chart type="area" height={160} options={options} series={series} />
+            <Chart type="area" height="160" options={options} series={series} />
           </Box>
-          <Box p={8} bg="gray.800" borderRadius={8}>
-            <Text fontSize="large" mb={4}>
+          <Box p={8} bg="gray.800" borderRadius="8">
+            <Text fontSize="large" mb="4">
               Open rate
             </Text>
-            <Chart type="area" height={160} options={options} series={series} />
+            <Chart type="area" height="160" options={options} series={series} />
           </Box>
         </SimpleGrid>
       </Flex>
