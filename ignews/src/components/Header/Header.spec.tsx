@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Header } from "./Header";
 
 // forço uma function que não depende somente do componente,
@@ -16,19 +16,26 @@ jest.mock("next/router", () => {
   };
 });
 
+// se chamar a importação, ela devolve uma function com os tipos de dados originais da lib
+jest.mock("next-auth/react", () => {
+  return {
+    useSession() {
+      return [null, false];
+    },
+  };
+});
+
 // crio uma categoria para os testes
 describe("Header component", () => {
-
   // teste unitario para renderizar o component
   it("renders correctly", () => {
-    const { getByText } = render(
+    render(
       // Eu passo o meu component a ser testado, com os parametros necessarios
-      <Header/>
+      <Header />
     );
 
     // retorno da minha função de render
-    expect(getByText("Home")).toBeInTheDocument();
-    expect(getByText("Posts")).toBeInTheDocument();
+    expect(screen.getByText("Home")).toBeInTheDocument();
+    expect(screen.getByText("Posts")).toBeInTheDocument();
   });
-
 });

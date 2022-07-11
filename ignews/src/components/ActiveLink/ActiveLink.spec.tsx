@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { ActiveLink } from "./ActiveLink";
 
 // forço uma function que não depende somente do componente,
@@ -21,7 +21,7 @@ describe("ActiveLink component", () => {
 
   // teste unitario para renderizar o component
   it("renders correctly", () => {
-    const { getByText } = render(
+  render(
       // Eu passo o meu component a ser testado, com os parametros necessarios
       <ActiveLink href="/" activeClassName="active">
         <a>Home</a>
@@ -29,11 +29,11 @@ describe("ActiveLink component", () => {
     );
 
     // retorno da minha função de render
-    expect(getByText("Home")).toBeInTheDocument();
+    expect(screen.getByText("Home")).toBeInTheDocument();
   });
 
   it("adds active class if the link is currently active", () => {
-    const { getByText } = render(
+  render(
       // Eu passo o meu component a ser testado, com os parametros necessarios
       <ActiveLink href="/" activeClassName="active">
         <a>Home</a>
@@ -41,6 +41,6 @@ describe("ActiveLink component", () => {
     );
 
     // retorno da minha função de render
-    expect(getByText("Home")).toHaveClass("active");
+    expect(screen.getByText("Home")).toHaveClass("active");
   });
 });
