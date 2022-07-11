@@ -13,7 +13,7 @@ describe("SignInButton component", () => {
     // faz um retorno para a mock
     const useSessionMocked = jest.mocked(useSession);
 // faz um retorno unico para a primeira vez que o metodo for chamado
-    useSessionMocked.mockReturnValueOnce([null, false]);
+    useSessionMocked.mockReturnValueOnce([null, false]as any);
 
     render(
       // Eu passo o meu component a ser testado, com os parametros necessarios
@@ -31,7 +31,7 @@ describe("SignInButton component", () => {
     useSessionMocked.mockReturnValueOnce([
       { user: { name: "John", email: "john@gmail.com" }, expires: "fake" },
       false
-    ]);
+    ]as any);
 
     render(
       // Eu passo o meu component a ser testado, com os parametros necessarios
